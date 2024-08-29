@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Components Order Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .order-form {
+            max-width: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Order Form for Computer Components</h1>
+        <form class="order-form" id="orderForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="components">Select Components</label>
+                <select multiple class="form-control" id="components" required>
+                    <option>CPU</option>
+                    <option>GPU</option>
+                    <option>Motherboard</option>
+                    <option>RAM</option>
+                    <option>Storage</option>
+                    <option>Power Supply</option>
+                    <option>Cooling System</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" id="quantity" min="1" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Order</button>
+        </form>
+        <div id="orderSummary" class="mt-5"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const components = Array.from(document.getElementById('components').selectedOptions).map(option => option.value);
+            const quantity = document.getElementById('quantity').value;
+
+            // Display order summary
+            const summary = `
+                <h2>Order Summary</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Components:</strong> ${components.join(', ')}</p>
+                <p><strong>Quantity:</strong> ${quantity}</p>
+            `;
+            document.getElementById('orderSummary').innerHTML = summary;
+        });
+    </script>
+</body>
+</html>
